@@ -42,13 +42,13 @@ const files: Record<string, { path: string; lines: string[] }> = {
     lines: [
       '# Wisp',
       '',
-      'A folder-backed Markdown editor. The folder is the format.',
+      'A folder-backed Markdown editor with Claude doing the filing.',
       '',
       '## Decisions',
       '',
-      '- The editor shows the file, not a picture of the file.',
+      '- Claude proposes the edit; **you** approve the diff.',
+      '- Images get described into the note, so a picture is searchable.',
       '- Reminders live in `.wisp-reminders.json` at the vault root.',
-      '- Dot-prefixed entries stay hidden, including that one.',
       '',
       '> Notes should outlive the app that wrote them.',
       '',
@@ -226,8 +226,20 @@ function open(id: string) {
         </ul>
       </div>
 
-      <!-- ── Editor: raw source, nothing rendered ── -->
+      <!-- ── Editor: the smart box on top, raw source below ── -->
       <div class="pane">
+        <div class="smart">
+          <p class="smart-in">
+            Jot a note and Add files it. Ask a question and Lookup answers it.
+          </p>
+          <div class="smart-bar">
+            <span class="sbtn">Check</span>
+            <span class="sbtn">Add</span>
+            <span class="smart-status">Claude · ready</span>
+            <span class="sbtn">Lookup</span>
+          </div>
+        </div>
+
         <pre class="editor"><code><span
           v-for="(line, i) in current.lines"
           :key="i"
@@ -242,8 +254,8 @@ function open(id: string) {
       </div>
     </div>
     <figcaption class="sr">
-      A mock of the Wisp window: a file tree and reminder list on the left, raw Markdown source on
-      the right.
+      A mock of the Wisp window: a file tree and reminder list on the left; on the right, the box
+      that hands a note or a question to Claude, above the raw Markdown source.
     </figcaption>
   </figure>
 </template>
@@ -518,6 +530,47 @@ function open(id: string) {
 .rems li.due .chip {
   background: color-mix(in srgb, var(--ember) 14%, transparent);
   color: var(--ember);
+}
+
+/* ── Smart box ── */
+.smart {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.smart-in {
+  padding: 0.75rem 1.1rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--faint);
+}
+
+.smart-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.65rem;
+  background: var(--surface-sunk);
+  border-top: 1px solid var(--rule-soft);
+}
+
+.sbtn {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 4px;
+}
+
+.smart-status {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  color: var(--faint);
 }
 
 /* ── Editor ── */

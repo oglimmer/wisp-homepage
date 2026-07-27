@@ -5,7 +5,7 @@ useHead({
     {
       name: 'description',
       content:
-        'How Wisp and this website handle personal data. The app keeps your notes on your own disk and sends nothing to us.',
+        'How Wisp and this website handle personal data. The app keeps your notes on your own disk, sends nothing to us, and reaches Anthropic only through the Claude tool you install yourself.',
     },
   ],
 })
@@ -25,8 +25,10 @@ useHead({
         install and use the app.
       </p>
       <p>
-        The short version: Wisp runs entirely on your own computer. Your notes, your folder and your
-        reminders never reach us, because there is nowhere for them to be sent.
+        The short version: Wisp runs on your own computer, and we operate no service behind it. Your
+        notes, your folder and your reminders never reach us, because there is nowhere for them to
+        be sent. The AI features are the one thing that leaves your machine, and they leave it
+        through the Claude tool you installed and signed in to yourself — see section 2.
       </p>
     </section>
 
@@ -60,8 +62,19 @@ useHead({
           locally so the app can reopen it.
         </li>
         <li>
+          <strong>The AI features run through your own Claude installation.</strong> Filing a note,
+          answering a question from your notes and describing an imported image are all performed by
+          Anthropic’s <code>claude</code> command-line tool, which you install and sign in to
+          yourself. When you use one of those features, Wisp hands the relevant note contents — or,
+          for an image, that image file — to that tool on your own machine, and it sends them to
+          Anthropic under your own account and Anthropic’s terms. We are not a party to that
+          exchange and never receive the content. Install the tool or don’t: without it, nothing
+          leaves your computer.
+        </li>
+        <li>
           <strong>No telemetry and no analytics.</strong> The app does not collect usage statistics,
-          crash reports or identifiers, and does not transmit your content anywhere.
+          crash reports or identifiers, and opens no connection of its own. The only outbound
+          traffic is the <code>claude</code> tool above, when you ask for it.
         </li>
       </ul>
       <p class="fine">
@@ -102,6 +115,12 @@ useHead({
     <section>
       <h2><span>##</span>5. Third parties</h2>
       <ul>
+        <li>
+          <strong>Anthropic.</strong> Wisp’s AI features are carried out by the <code>claude</code>
+          command-line tool on your own machine, using your own Anthropic account. What you send it
+          is governed by Anthropic’s privacy policy and terms, not ours; we neither see nor store
+          any of it.
+        </li>
         <li>
           <strong>Web fonts.</strong> The typefaces on this site are requested from Google Fonts
           (fonts.googleapis.com and fonts.gstatic.com). Your IP address is transmitted to Google in

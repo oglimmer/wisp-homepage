@@ -140,6 +140,11 @@ button {
   padding-inline: var(--gut);
 }
 
+/* The nav is sticky and 60px tall, so an anchored section has to clear it. */
+section[id] {
+  scroll-margin-top: 76px;
+}
+
 .u-shell-wide {
   width: min(74rem, 100%);
   margin-inline: auto;

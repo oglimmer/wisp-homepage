@@ -9,20 +9,20 @@ export default defineNuxtConfig({
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Wisp — a Markdown editor that shows you the Markdown',
+      title: 'Wisp — notes that file themselves',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
           content:
-            'Wisp opens a folder and edits what is inside it — plain Markdown, monospace, saved straight back to disk. A minimal, folder-backed note editor for macOS.',
+            'A Markdown note editor with Claude wired into it. Type a note and it is filed into the right file; ask a question and it is answered from your own notes; drop an image and it is described into searchable text. Plain files, macOS, MIT.',
         },
-        { property: 'og:title', content: 'Wisp — a Markdown editor that shows you the Markdown' },
+        { property: 'og:title', content: 'Wisp — notes that file themselves' },
         {
           property: 'og:description',
           content:
-            'Wisp opens a folder and edits what is inside it — plain Markdown, monospace, saved straight back to disk.',
+            'A Markdown note editor with Claude wired into it: notes file themselves, questions are answered from your own notes, and images become searchable text.',
         },
         { property: 'og:type', content: 'website' },
       ],

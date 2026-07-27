@@ -1,8 +1,9 @@
 <script setup lang="ts">
 const links = [
-  { label: 'Editing', to: '/#editing' },
-  { label: 'Vault', to: '/#vault' },
+  { label: 'Claude', to: '/#claude' },
+  { label: 'Images', to: '/#images' },
   { label: 'Reminders', to: '/#reminders' },
+  { label: 'Editing', to: '/#editing' },
 ]
 </script>
 

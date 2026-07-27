@@ -48,10 +48,18 @@ useHead({
       </p>
       <p>
         2.2. We claim no rights over your notes, and we receive no copy of them. There is no server
-        component, no account and no upload.
+        component, no account and no upload to us.
       </p>
       <p>
-        2.3. Backups are your responsibility. Because your notes are ordinary files in an ordinary
+        2.3. The Software's AI features — filing a note, answering a question from your notes, and
+        describing an imported image — are carried out by Anthropic's <code>claude</code>
+        command-line tool, which you install separately and use under your own Anthropic account.
+        Using those features sends the notes or images concerned to Anthropic through that tool, on
+        your own account and subject to Anthropic's terms. Without the tool installed, those
+        features are simply unavailable and the rest of the Software works as normal.
+      </p>
+      <p>
+        2.4. Backups are your responsibility. Because your notes are ordinary files in an ordinary
         folder, any backup tool you already use will cover them.
       </p>
     </section>
@@ -105,6 +113,13 @@ useHead({
         6.2. The Software writes to and deletes files in the folder you select. We make no warranty
         that it is free of defects. Keep backups of anything you cannot afford to lose.
       </p>
+      <p>
+        6.3. AI output is not guaranteed to be correct. A proposed filing, an answer drawn from your
+        notes, a suggested reminder date and a generated image description may all be wrong. The
+        Software shows you a proposed change before it writes anything; reviewing it is your
+        responsibility, and we give no warranty as to the accuracy or suitability of anything the
+        model produces.
+      </p>
     </section>
 
     <section>
@@ -126,6 +141,12 @@ useHead({
       <p>
         8.1. Distribution runs through GitHub and Homebrew. Their own terms and privacy policies
         apply when you use them, and we have no control over those services.
+      </p>
+      <p>
+        8.2. The AI features depend on Anthropic's <code>claude</code> command-line tool and your own
+        Anthropic account. Anthropic's terms, privacy policy and usage limits apply to that use, we
+        have no control over that service, and we are not responsible if it changes, becomes
+        unavailable or produces an unusable result.
       </p>
     </section>
 
