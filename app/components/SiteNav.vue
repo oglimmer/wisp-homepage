@@ -26,7 +26,7 @@ const links = [
           target="_blank"
           rel="noopener"
         >GitHub</a>
-        <a class="cta" href="/#install">Install</a>
+        <NuxtLink class="cta" to="/#install">Install</NuxtLink>
       </div>
     </div>
   </header>

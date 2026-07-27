@@ -2,7 +2,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
   css: ['~/assets/css/main.css'],
+  // Static export for GitHub Pages: adds .nojekyll and a 404.html fallback.
+  nitro: { preset: 'github-pages' },
   app: {
+    // Project pages are served from /wisp-homepage/; the workflow sets this.
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       htmlAttrs: { lang: 'en' },
       title: 'Wisp — a Markdown editor that shows you the Markdown',
