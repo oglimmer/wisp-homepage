@@ -1,3 +1,12 @@
+// Project pages are served from /wisp-homepage/; the workflow sets both of
+// these. Head links are not base-prefixed by Nuxt, so we do it here.
+const base = process.env.NUXT_APP_BASE_URL || '/'
+const icon = (name: string) => `${base}icons/${name}`.replace(/\/{2,}/g, '/')
+// Site root — origin *and* base path already, since it comes from
+// actions/configure-pages. Empty when generating locally, in which case
+// og:image falls back to the relative path.
+const siteUrl = (process.env.NUXT_PUBLIC_SITE_URL || '').replace(/\/+$/, '')
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
@@ -25,8 +34,18 @@ export default defineNuxtConfig({
             'A Markdown note editor with Claude wired into it: notes file themselves, questions are answered from your own notes, and images become searchable text.',
         },
         { property: 'og:type', content: 'website' },
+        {
+          property: 'og:image',
+          content: siteUrl ? `${siteUrl}/icons/icon-1024.png` : icon('icon-1024.png'),
+        },
+        // Matches --fog, the page background.
+        { name: 'theme-color', content: '#e7eaf0' },
       ],
       link: [
+        // The macOS app icon, reused as the site's mark.
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: icon('icon-32.png') },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: icon('icon-16.png') },
+        { rel: 'apple-touch-icon', sizes: '256x256', href: icon('icon-256.png') },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {

@@ -45,6 +45,8 @@ jobs:
         run: npm run generate
         env:
           NUXT_APP_BASE_URL: ${{ steps.base.outputs.url }}
+          # Full origin + path, so og:image can be absolute.
+          NUXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

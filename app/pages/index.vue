@@ -7,6 +7,9 @@
 const derendered = ref(false)
 const settled = ref(false)
 
+// The macOS app icon, shipped in public/icons/.
+const appIcon = publicAsset('icons/icon-256.png')
+
 onMounted(() => {
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (still) {
@@ -329,8 +332,19 @@ const safety = [
     <!-- ══ Install ═══════════════════════════════════════════ -->
     <section id="install" class="get u-shell">
       <div class="get-card">
-        <p class="u-eyebrow">Install</p>
-        <h2 class="u-display get-h">Two lines and it's yours.</h2>
+        <div class="get-head">
+          <img
+            class="get-icon"
+            :src="appIcon"
+            width="72"
+            height="72"
+            alt=""
+          >
+          <div>
+            <p class="u-eyebrow">Install</p>
+            <h2 class="u-display get-h">Two lines and it's yours.</h2>
+          </div>
+        </div>
 
         <CommandBlock
           label="macOS · Apple Silicon · signed and notarised"
@@ -816,9 +830,26 @@ const safety = [
   box-shadow: var(--shadow-lift);
 }
 
+.get-head {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+/* The icon already carries macOS's own padding, so it needs no box of its own. */
+.get-icon {
+  flex: none;
+  width: clamp(56px, 12vw, 72px);
+  height: auto;
+}
+
 .get-h {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
-  margin: 0.85rem 0 1.8rem;
+  margin: 0.35rem 0 0;
+}
+
+.get-head + .get-cmd {
+  margin-top: 1.8rem;
 }
 
 .get-cmd {

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const appIcon = publicAsset('icons/icon-64.png')
+
 const links = [
   { label: 'Claude', to: '/#claude' },
   { label: 'Images', to: '/#images' },
@@ -11,6 +13,7 @@ const links = [
   <header class="bar">
     <div class="u-shell inner">
       <NuxtLink to="/" class="wordmark">
+        <img class="icon" :src="appIcon" width="26" height="26" alt="">
         <!-- The page is a Markdown document; this is its h1. -->
         <span class="hash" aria-hidden="true">#</span>
         <span>wisp</span>
@@ -60,6 +63,14 @@ const links = [
   display: inline-flex;
   align-items: baseline;
   gap: 0.3em;
+}
+
+/* The row is baseline-aligned for the text; the icon centres against it. */
+.icon {
+  align-self: center;
+  margin-right: 0.25em;
+  width: 26px;
+  height: 26px;
 }
 
 .hash {
