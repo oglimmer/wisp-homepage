@@ -1,0 +1,222 @@
+/* ─────────────────────────────────────────────────────────────
+   Wisp — design tokens
+   The palette is named after what it does in a Markdown file.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* Surfaces: a cool, low-contrast fog. Never white, never cream. */
+  --fog: #e7eaf0;
+  --fog-deep: #dde1ea;
+  --surface: #fbfcfd;
+  --surface-sunk: #f2f4f8;
+
+  /* Text */
+  --ink: #12151a;
+  --ink-soft: #2b313b;
+  --muted: #5c6675;
+  --faint: #8b94a4;
+
+  /* The accent IS the syntax-mark colour: the hashes, asterisks and
+     brackets Wisp refuses to hide. Everything structural uses it. */
+  --mark: #6a4fe0;
+  --mark-deep: #5138c4;
+  --mark-wash: #ece8fd;
+
+  /* The one warm signal in the product: a reminder that has come due. */
+  --ember: #a2560a;
+  --ember-wash: #fbeedb;
+
+  --rule: #cbd1dc;
+  --rule-soft: #dfe3ec;
+
+  --font-display: 'Martian Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-body: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  --shadow-lift: 0 1px 2px rgba(18, 21, 26, 0.05), 0 12px 34px -14px rgba(18, 21, 26, 0.24);
+  --shadow-window: 0 2px 4px rgba(18, 21, 26, 0.05), 0 34px 70px -28px rgba(18, 21, 26, 0.36);
+
+  --gut: clamp(1.25rem, 4vw, 2.5rem);
+  --measure: 34rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fog);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure,
+dl {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--mark-deep);
+  text-decoration-color: color-mix(in srgb, var(--mark) 35%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-color: var(--mark);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ── Shared type roles ────────────────────────────────────── */
+
+.u-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+/* The `##` that opens every section: the page is itself a Markdown
+   document, so its structure is written in Markdown's own marks. */
+.u-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.u-eyebrow::before {
+  content: '##';
+  color: var(--mark);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 500;
+}
+
+/* The page reads as a document, so it holds a single centred column.
+   Only the app window is allowed to break wider than the text. */
+.u-shell {
+  width: min(62rem, 100%);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+.u-shell-wide {
+  width: min(74rem, 100%);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+.u-prose {
+  max-width: var(--measure);
+  color: var(--muted);
+}
+
+.u-prose strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* Inline code, everywhere on the page */
+code,
+.u-code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--mark-deep);
+  background: var(--mark-wash);
+  padding: 0.1em 0.36em;
+  border-radius: 4px;
+}
+
+/* Keyboard shortcuts */
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.12em 0.42em;
+  white-space: nowrap;
+}
+
+/* ── Syntax marks inside the editor mocks ─────────────────── */
+
+.sy {
+  font-style: normal;
+  color: var(--mark);
+  opacity: 0.85;
+}
+
+.cd {
+  font-style: normal;
+  color: var(--ember);
+}
+
+.ur {
+  font-style: normal;
+  color: var(--faint);
+}
+
+.hit {
+  background: color-mix(in srgb, var(--ember) 26%, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ember) 30%, transparent);
+}
+
+.hit-live {
+  background: color-mix(in srgb, var(--ember) 62%, transparent);
+  box-shadow: 0 0 0 1px var(--ember);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
