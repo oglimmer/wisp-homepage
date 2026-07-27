@@ -122,9 +122,9 @@ useHead({
           any of it.
         </li>
         <li>
-          <strong>Web fonts.</strong> The typefaces on this site are requested from Google Fonts
-          (fonts.googleapis.com and fonts.gstatic.com). Your IP address is transmitted to Google in
-          order to deliver them, and Google may process it under its own privacy policy.
+          <strong>Web fonts.</strong> The typefaces on this site are self-hosted and served from the
+          same origin as the page. No font is fetched from Google Fonts or any other third party, so
+          no request and no IP address of yours reaches one.
         </li>
         <li>
           <strong>GitHub.</strong> The source code, releases and Homebrew tap are hosted on GitHub.

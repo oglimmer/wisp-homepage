@@ -10,7 +10,10 @@ const siteUrl = (process.env.NUXT_PUBLIC_SITE_URL || '').replace(/\/+$/, '')
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  css: ['~/assets/css/main.css'],
+  // fonts.css first: the @font-face rules must be in place before main.css
+  // refers to the families. Both are bundled and served from our own origin —
+  // the site loads nothing from a third-party URL.
+  css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
   // Static export for GitHub Pages: adds .nojekyll and a 404.html fallback.
   nitro: { preset: 'github-pages' },
   app: {
@@ -46,12 +49,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: icon('icon-32.png') },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: icon('icon-16.png') },
         { rel: 'apple-touch-icon', sizes: '256x256', href: icon('icon-256.png') },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500;600;700&display=swap',
-        },
       ],
     },
   },
