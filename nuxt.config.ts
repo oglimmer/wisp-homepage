@@ -1,11 +1,15 @@
-// Project pages are served from /wisp-homepage/; the workflow sets both of
-// these. Head links are not base-prefixed by Nuxt, so we do it here.
+// The site lives at the root of its custom domain, so the base path is "/".
+// The workflow still passes whatever actions/configure-pages reports, which
+// keeps the project-pages URL (/wisp-homepage/) working as a fallback. Head
+// links are not base-prefixed by Nuxt, so we do it here.
 const base = process.env.NUXT_APP_BASE_URL || '/'
 const icon = (name: string) => `${base}icons/${name}`.replace(/\/{2,}/g, '/')
-// Site root — origin *and* base path already, since it comes from
-// actions/configure-pages. Empty when generating locally, in which case
-// og:image falls back to the relative path.
-const siteUrl = (process.env.NUXT_PUBLIC_SITE_URL || '').replace(/\/+$/, '')
+// Site root — origin *and* base path, from actions/configure-pages. Defaults
+// to the custom domain so a local `npm run generate` still emits absolute URLs.
+const siteUrl = (process.env.NUXT_PUBLIC_SITE_URL || 'https://wisp.oglimmer.com').replace(
+  /\/+$/,
+  '',
+)
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -17,8 +21,7 @@ export default defineNuxtConfig({
   // Static export for GitHub Pages: adds .nojekyll and a 404.html fallback.
   nitro: { preset: 'github-pages' },
   app: {
-    // Project pages are served from /wisp-homepage/; the workflow sets this.
-    baseURL: process.env.NUXT_APP_BASE_URL || '/',
+    baseURL: base,
     head: {
       htmlAttrs: { lang: 'en' },
       title: 'Wisp — notes that file themselves',
@@ -37,10 +40,7 @@ export default defineNuxtConfig({
             'A Markdown note editor with Claude wired into it: notes file themselves, questions are answered from your own notes, and images become searchable text.',
         },
         { property: 'og:type', content: 'website' },
-        {
-          property: 'og:image',
-          content: siteUrl ? `${siteUrl}/icons/icon-1024.png` : icon('icon-1024.png'),
-        },
+        { property: 'og:image', content: `${siteUrl}/icons/icon-1024.png` },
         // Matches --fog, the page background.
         { name: 'theme-color', content: '#e7eaf0' },
       ],

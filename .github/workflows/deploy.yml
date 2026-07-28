@@ -33,20 +33,25 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Resolve base URL
+      - name: Resolve URLs
         id: base
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
-        # Nuxt wants a trailing slash; base_path is "/wisp-homepage" (or empty
-        # for a user site / custom domain).
-        run: echo "url=${BASE_PATH%/}/" >> "$GITHUB_OUTPUT"
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
+        # Nuxt wants a trailing slash; base_path is empty on the custom domain
+        # (and "/wisp-homepage" if the site ever falls back to project pages).
+        # base_url follows the Pages "enforce HTTPS" setting, so pin it to
+        # https — crawlers should never see an http:// og:image.
+        run: |
+          echo "url=${BASE_PATH%/}/" >> "$GITHUB_OUTPUT"
+          echo "site=${BASE_URL/#http:/https:}" >> "$GITHUB_OUTPUT"
 
       - name: Generate static site
         run: npm run generate
         env:
           NUXT_APP_BASE_URL: ${{ steps.base.outputs.url }}
           # Full origin + path, so og:image can be absolute.
-          NUXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NUXT_PUBLIC_SITE_URL: ${{ steps.base.outputs.site }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
